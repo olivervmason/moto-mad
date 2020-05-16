@@ -1,5 +1,7 @@
 <h1>Listings page</h1>
 
+<%= link_to "Create a listing for your bike here!", new_listing_path %>
+</br></br>
 <% for listing in @listings %>
     <b> <%= listing.title %> </b> 
     <%= listing.year %> 
