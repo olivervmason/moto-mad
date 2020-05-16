@@ -1,1 +1,10 @@
 <h1>Listings page</h1>
+
+<% for listing in @listings %>
+    <b> <%= listing.title %> </b> 
+    <%= listing.year %> 
+    <%= listing.manufacturer %>
+    <%= listing.model %> -
+    <%= number_to_currency(listing.price) %>
+    <br/>    
+<% end %>
