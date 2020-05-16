@@ -1,0 +1,76 @@
+
+
+<%= form_with model: @listing, local: true do |form|  %>
+
+    <div>
+        <%= form.label :listing_title %>
+        <%= form.text_field :title %>
+    </div>
+
+    <div>
+        <%= form.label :manufacturer %>
+        <%= form.text_field :manufacturer %>
+    </div>
+    
+    <div>
+        <%= form.label :model %>
+        <%= form.text_field :model %>
+    </div>
+
+    <div>
+        <%= form.label :style %>
+        <%= form.text_field :style %>
+    </div>
+
+    <div>
+        <%= form.label :year %>
+        <%= form.number_field :year %>
+    </div>
+
+    <div>
+        <%= form.label :mileage_in_km %>
+        <%= form.number_field :mileage %>
+    </div>
+
+    <div>
+        <%= form.label :engine_cc %>
+        <%= form.number_field :engine %>
+    </div>
+
+    <div>
+        <%= form.label :price %>
+        <%= form.number_field :price %>
+    </div>
+
+    <div>
+        <%= form.label :location %>
+        <%= form.text_field :location %>
+    </div>
+
+    LAMs approved?
+    <% lams.each do |option| %>
+        <div>
+            <%= form.radio_button :lams, option %>
+            <%= form.label "lams_#{option}".to_sym, option, value: listing.lams %>
+        <div>
+    <% end %>
+
+    <div>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </div>
+
+    <div>
+        <%= form.label :listing_picture %>
+        <%= form.file_field :picture, accept: "image/png,image/jpeg,image/jpg,image/gif" %>
+    </div>   
+
+    </br>
+
+    <div>
+        <%= form.submit value: "Click to save listing" %>
+    </div>
+
+
+    </ul>
+<% end %>
