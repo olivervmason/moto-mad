@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  title: MyString
+  manufacturer: MyString
+  model: MyString
+  style: MyString
+  year: 1
+  engine: 1
+  price: 1
+  location: MyString
+  mileage: 1
+  lams: 
+  description: MyText
+
+two:
+  user: two
+  title: MyString
+  manufacturer: MyString
+  model: MyString
+  style: MyString
+  year: 1
+  engine: 1
+  price: 1
+  location: MyString
+  mileage: 1
+  lams: 
+  description: MyText
