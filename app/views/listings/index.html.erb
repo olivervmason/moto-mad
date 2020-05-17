@@ -1,12 +1,13 @@
 <h1>Listings page</h1>
 
 <%= link_to "Create a listing for your bike here!", new_listing_path %>
-</br></br>
+</br></br><br/>
 <% for listing in @listings %>
-    <b> <%= listing.title %> </b> 
+    <b><%= link_to "#{listing.title}", listing_path(listing.id) %></b>
     <%= listing.year %> 
     <%= listing.manufacturer %>
     <%= listing.model %> -
     <%= number_to_currency(listing.price) %>
-    <br/>    
+    <br/><br/>    
 <% end %>
+

@@ -17,12 +17,15 @@ class ListingsController < ApplicationController
         if @listing.errors.any?
             set_new_listing_variables
             render "new"
-            # puts @listing.errors.full_messages  
+            puts @listing.errors.full_messages  
         else
             redirect_to listings_path            
         end
-
         # render json: params
+    end
+
+    def show
+        @listing = Listing.find(params["id"])
     end
 
     private

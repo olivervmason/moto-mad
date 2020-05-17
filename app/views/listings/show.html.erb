@@ -1,0 +1,21 @@
+    <%= link_to "All Listings", listings_path%>
+    <h1>    <%= @listing.title %> </h1> 
+
+    <% if @listing.picture.attached? %>
+        <%= image_tag @listing.picture, style: "width: 350px"%>
+    <% end %>
+
+    <h2><%= @listing.year %>
+    <%= @listing.manufacturer %>
+    <%= @listing.model %></h2>
+
+    <h4>Asking price: <%= number_to_currency(@listing.price) %> </h4>
+
+    <p>Bike style: <%= @listing.style %> </p>
+    <p>Mileage: <%= @listing.mileage %> </p>
+    <p>Engine size: <%= @listing.engine %>cc </p>
+    <p>Seller's location: <%= @listing.location %> </p>
+    <p>LAM's legal? <%= @listing.lams %> </p>
+    <p>Description: <%= @listing.description %> </p>
+
+    
