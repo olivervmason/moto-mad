@@ -1,5 +1,7 @@
+    <%= image_tag "small_logo.png", alt: "Moto-Mad logo" %>
+    </br>
     <%= link_to "All Listings", listings_path%>
-
+    </br>
     <% if current_user.id == @listing.user.id %>
     <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
 
