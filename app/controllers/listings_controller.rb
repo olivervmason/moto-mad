@@ -21,7 +21,6 @@ class ListingsController < ApplicationController
         else
             redirect_to listings_path            
         end
-        # render json: params
     end
 
     def show
@@ -55,7 +54,11 @@ class ListingsController < ApplicationController
     end
 
     def destroy
-        render json: "Destroy method"
+        @listing = current_user.listings.find_by_id(params["id"])
+        if @listing 
+            @listing.destroy
+        end
+        redirect_to listings_path
     end
 
     private
