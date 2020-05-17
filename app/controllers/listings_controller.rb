@@ -13,8 +13,15 @@ class ListingsController < ApplicationController
 
     def create
         @listing = current_user.listings.create(listing_parameters)
-        puts @listing.errors.full_messages  
-        redirect_to listings_path
+
+        if @listing.errors.any?
+            set_new_listing_variables
+            render "new"
+            # puts @listing.errors.full_messages  
+        else
+            redirect_to listings_path            
+        end
+
         # render json: params
     end
 
@@ -22,5 +29,9 @@ class ListingsController < ApplicationController
 
     def listing_parameters
         params.require(:listing).permit(:title, :manufacturer, :model, :style, :price, :location, :mileage, :lams, :description, :engine, :year, :picture)
+    end
+
+    def set_new_listing_variables
+        @lams = Listing.lams.keys    
     end
 end

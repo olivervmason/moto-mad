@@ -1,5 +1,3 @@
-
-
 <%= form_with model: @listing, local: true do |form|  %>
 
     <div>
@@ -71,6 +69,13 @@
         <%= form.submit value: "Click to save listing" %>
     </div>
 
-
+    <% if listing.errors.any? %>
+    <p style="color:red">It looks like there was some information missing from the form you submitted:</p>
+    <ul>
+        <% listing.errors.full_messages.each do |error| %>
+        <li style="color:red" > <%= error %> </li>
+        <%end %>
+    <%end %>
     </ul>
+
 <% end %>
