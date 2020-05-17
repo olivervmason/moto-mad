@@ -1,4 +1,5 @@
     <%= link_to "All Listings", listings_path%>
+
     <h1>    <%= @listing.title %> </h1> 
 
     <% if @listing.picture.attached? %>
@@ -16,6 +17,7 @@
     <p>Engine size: <%= @listing.engine %>cc </p>
     <p>Seller's location: <%= @listing.location %> </p>
     <p>LAM's legal? <%= @listing.lams %> </p>
+    <p>Seller's email: <%= @listing.user.email %> </p>
     <p>Description: <%= @listing.description %> </p>
 
     

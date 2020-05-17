@@ -1,0 +1,13 @@
+<%= link_to "All Listings", listings_path%>
+
+<h1>Edit listing form</h1> 
+
+<p>Edit the details of your bike in the form below:</p>
+
+<%= render "form", listing: @listing, lams: @lams %>
+
+<% if current_user.id == @listing.user.id %>
+    <%= form_with model: @listing, local: true, method: "delete" do |form| %>
+        <%= submit_tag "DELETE LISTING" %>
+    <% end %>
+<% end %>

@@ -28,6 +28,15 @@ class ListingsController < ApplicationController
         @listing = Listing.find(params["id"])
     end
 
+    def edit
+        @listing = Listing.find(params["id"])
+        set_new_listing_variables
+    end
+
+    def destroy
+        render json: "Destroy method"
+    end
+
     private
 
     def listing_parameters

@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   post "/listings/", to: "listings#create"
   get "/listings/:id", to: "listings#show", as: "listing"
 
+  get "/listings/:id/edit", to: "listings#edit", as: "edit_listing"
+  delete "/listings/:id", to: "listings#destroy"
+
 end
