@@ -29,8 +29,29 @@ class ListingsController < ApplicationController
     end
 
     def edit
-        @listing = Listing.find(params["id"])
         set_new_listing_variables
+        @listing = current_user.listings.find_by_id(params["id"])
+
+        if @listing
+            render("edit") 
+        else
+            redirect_to listings_path
+        end
+    end
+
+    def update
+        @lams = Listing.lams.keys
+        @listing = current_user.listings.find_by_id(params["id"])
+        if @listing
+            @listing.update(listing_parameters)
+            if @listing.errors.any? 
+                render "edit"
+            else
+                redirect_to listings_path
+            end
+        else 
+            redirect_to listings_path             
+        end
     end
 
     def destroy

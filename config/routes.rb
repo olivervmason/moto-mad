@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   get "/listings/:id/edit", to: "listings#edit", as: "edit_listing"
   delete "/listings/:id", to: "listings#destroy"
-
+  patch "/listings/:id", to: "listings#update"
+  put "/listings/:id", to: "listings#update"
 end

@@ -1,9 +1,19 @@
     <%= link_to "All Listings", listings_path%>
 
+    <% if current_user.id == @listing.user.id %>
+    <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
+
+    </br></br>
+
+    <%= form_with model: @listing, local: true, method: "delete" do |form| %>
+        <%= submit_tag "Delete this listing" %>
+    <% end %>
+
     <h1>    <%= @listing.title %> </h1> 
 
     <% if @listing.picture.attached? %>
         <%= image_tag @listing.picture, style: "width: 350px"%>
+    <% end %>
     <% end %>
 
     <h2><%= @listing.year %>
