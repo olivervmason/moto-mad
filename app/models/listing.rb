@@ -6,4 +6,5 @@ class Listing < ApplicationRecord
   belongs_to :style
   belongs_to :location
   has_one_attached :picture
+  has_many :questions, dependent: :destroy
 end
