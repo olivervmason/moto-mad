@@ -1,50 +1,50 @@
 <%= form_with model: @listing, local: true do |form|  %>
 
     <div>
-        <%= form.label :listing_title %>
-        <%= form.text_field :title %>
+        <%= form.label :bike_location %>
+        <%= form.select(:location_id, location.map{|l| [l.location, l.id]}) %>
     </div>
-
+    </br>
     <div>
         <%= form.label :bike_manufacturer %>
         <%= form.select(:manufacturer_id, manufacturer.map{|m| [m.manufacturer, m.id]}) %>
     </div>
-
-    <div>
-        <%= form.label :model %>
-        <%= form.text_field :model %>
-    </div>
-
+    </br>
     <div>
         <%= form.label :bike_style %>
         <%= form.select(:style_id, style.map{|s| [s.style, s.id]}) %>
     </div>
-
+    </br>
+    <div>
+        <%= form.label :listing_title %>
+        <%= form.text_field :title %>
+    </div>
+    </br>
+    <div>
+        <%= form.label :model %>
+        <%= form.text_field :model %>
+    </div>
+    </br>
     <div>
         <%= form.label :year %>
         <%= form.number_field :year %>
     </div>
-
+    </br>
     <div>
         <%= form.label :mileage_in_km %>
         <%= form.number_field :mileage %>
     </div>
-
+    </br>
     <div>
         <%= form.label :engine_cc %>
         <%= form.number_field :engine %>
     </div>
-
+    </br>
     <div>
         <%= form.label :price %>
         <%= form.number_field :price %>
     </div>
-
-    <div>
-        <%= form.label :bike_location %>
-        <%= form.select(:location_id, location.map{|l| [l.location, l.id]}) %>
-    </div>
-
+    </br>
     LAMs approved?
     <% lams.each do |option| %>
         <div>
