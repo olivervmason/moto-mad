@@ -31,6 +31,7 @@ class ListingsController < ApplicationController
 
     def edit
         set_new_listing_variables
+        set_manufacturer_style_and_locations
         @listing = current_user.listings.find_by_id(params["id"])
 
         if @listing
