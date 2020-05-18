@@ -19,15 +19,15 @@
     <% end %>
 
     <h2><%= @listing.year %>
-    <%= @listing.manufacturer %>
+    <%= @listing.manufacturer.manufacturer %>
     <%= @listing.model %></h2>
 
     <h4>Asking price: <%= number_to_currency(@listing.price) %> </h4>
 
-    <p>Bike style: <%= @listing.style %> </p>
+    <p>Bike style: <%= @listing.style.style %> </p>
     <p>Mileage: <%= @listing.mileage %> </p>
     <p>Engine size: <%= @listing.engine %>cc </p>
-    <p>Seller's location: <%= @listing.location %> </p>
+    <p>Seller's location: <%= @listing.location.location %> </p>
     <p>LAM's legal? <%= @listing.lams %> </p>
     <p>Seller's email: <%= @listing.user.email %> </p>
     <p>Description: <%= @listing.description %> </p>

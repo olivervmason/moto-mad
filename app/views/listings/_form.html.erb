@@ -6,18 +6,18 @@
     </div>
 
     <div>
-        <%= form.label :manufacturer %>
-        <%= form.text_field :manufacturer %>
+        <%= form.label :bike_manufacturer %>
+        <%= form.select(:manufacturer_id, manufacturer.map{|m| [m.manufacturer, m.id]}) %>
     </div>
-    
+
     <div>
         <%= form.label :model %>
         <%= form.text_field :model %>
     </div>
 
     <div>
-        <%= form.label :style %>
-        <%= form.text_field :style %>
+        <%= form.label :bike_style %>
+        <%= form.select(:style_id, style.map{|s| [s.style, s.id]}) %>
     </div>
 
     <div>
@@ -41,8 +41,8 @@
     </div>
 
     <div>
-        <%= form.label :location %>
-        <%= form.text_field :location %>
+        <%= form.label :bike_location %>
+        <%= form.select(:location_id, location.map{|l| [l.location, l.id]}) %>
     </div>
 
     LAMs approved?

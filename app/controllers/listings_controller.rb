@@ -9,9 +9,11 @@ class ListingsController < ApplicationController
     def new
         @listing = Listing.new
         @lams = Listing.lams.keys
+        set_manufacturer_style_and_locations
     end
 
     def create
+        set_manufacturer_style_and_locations
         @listing = current_user.listings.create(listing_parameters)
 
         if @listing.errors.any?
@@ -64,10 +66,17 @@ class ListingsController < ApplicationController
     private
 
     def listing_parameters
-        params.require(:listing).permit(:title, :manufacturer, :model, :style, :price, :location, :mileage, :lams, :description, :engine, :year, :picture)
+        params.require(:listing).permit(:title, :manufacturer_id, :model, :style_id, :price, :location_id, :mileage, :lams, :description, :engine, :year, :picture)
     end
 
     def set_new_listing_variables
         @lams = Listing.lams.keys    
     end
+
+    def set_manufacturer_style_and_locations
+        @manufacturer = Manufacturer.all
+        @style = Style.all
+        @location = Location.all
+    end
+
 end
