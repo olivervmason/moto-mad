@@ -55,8 +55,11 @@
     <p><b><%= question.title %>:</b> 
     <%= question.body %></p>
 
-    <p>Sellers response:</p>
-    <i><b><%= @answer.body %>:</i> 
+    <i>Seller response: <%= @q_answer.body %>:</i> 
+
+    <% for answer in question.answers %>
+    <li><%= answer.body %></li>
+    <% end %>
 
     <% if current_user.id == @listing.user.id %>
         <%= form_with model: @answer, local: true, method: "post" do |form|  %>

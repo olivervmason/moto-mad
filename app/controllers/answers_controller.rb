@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
         # puts params[:answer][:question][:id]
         puts params[:answer][:question_id]
         @answer = Question.find(params[:answer][:question_id]).answers.create(answer_params)
-        redirect_to listings_path
+        redirect_to listing_path(@answer.question.listing.id)
     end
 
     private
