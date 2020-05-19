@@ -55,9 +55,12 @@
     <p><b><%= question.title %>:</b> 
     <%= question.body %></p>
 
+    <p>Sellers response:</p>
+    <i><b><%= @answer.body %>:</i> 
+
     <% if current_user.id == @listing.user.id %>
         <%= form_with model: @answer, local: true, method: "post" do |form|  %>
-        <%= form.hidden_field(:question_id, value: @question.id) %>
+        <%= form.hidden_field(:question_id, value: question.id) %>
             <div>
                 <%= form.label :response %>
                 <%= form.text_area :body %>

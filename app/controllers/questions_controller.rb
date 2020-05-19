@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
         redirect_to listings_path
     end
         
-        private
+    private
 
     def question_params
         params.require(:question).permit(:listing_id, :title, :body)
