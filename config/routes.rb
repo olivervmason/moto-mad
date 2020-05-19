@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   put "/listings/:id", to: "listings#update"
 
 #Questions controller
-  post "/listings/:id", to: "questions#create"
+  post "/questions/", to: "questions#create"
 
 end

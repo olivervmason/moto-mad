@@ -27,6 +27,7 @@ class ListingsController < ApplicationController
 
     def show
         @listing = Listing.find(params["id"])
+        @question = Question.new
     end
 
     def edit

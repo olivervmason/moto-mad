@@ -10,14 +10,14 @@
 
         <%= form_with model: @listing, local: true, method: "delete" do |form| %>
             <%= submit_tag "Delete this listing" %>
-    <% end %>
-
-    <h1>    <%= @listing.title %> </h1> 
-
-        <% if @listing.picture.attached? %>
-            <%= image_tag @listing.picture, style: "width: 350px"%>
         <% end %>
     <% end %>
+
+    <h1>    <%= @listing.title %> </h1>  
+    <% if @listing.picture.attached? %>
+            <%= image_tag @listing.picture, style: "width: 350px"%>
+    <% end %>
+ 
 
     <h2><%= @listing.year %>
     <%= @listing.manufacturer.manufacturer %>
@@ -33,14 +33,20 @@
     <p>Seller's email: <%= @listing.user.email %> </p>
     <p>Description: <%= @listing.description %> </p>
 
-
     <% if current_user.id != @listing.user.id %>
-        <%= form_with model: @question, local: true, method: "post" do |form|  %>
-            <div>
-                <%= form.label :ask_the_seller_a_question %>
-                <%= form.text_area :description %>
-            </div>
+        </br>
+        <p><b>Ask the seller a question:</b></p>
 
+        <%= form_with model: @question, local: true, method: "post" do |form|  %>
+        <%= form.hidden_field(:listing_id, value: @listing.id) %>
+            <div>
+                <%= form.label :question_title %>
+                <%= form.text_field :title %>
+            </div>
+            <div>
+                <%= form.label :question_body %>
+                <%= form.text_area :body %>
+            </div>
             <div>
                 <%= form.submit value: "Click to submit question" %>
             </div>
