@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   delete "/listings/:id", to: "listings#destroy"
   patch "/listings/:id", to: "listings#update"
   put "/listings/:id", to: "listings#update"
+
+#Questions controller
+  post "/listings/:id", to: "questions#create"
+
 end
