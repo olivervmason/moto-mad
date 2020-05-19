@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 #Questions controller
   post "/questions/", to: "questions#create"
 
+#Answers controller
+  post "/answers/", to: "answers#create"
 end

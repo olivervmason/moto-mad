@@ -1,57 +1,71 @@
-    <%= image_tag "small_logo.png", alt: "Moto-Mad logo" %>
-    
-    <p><%= link_to "All Listings", listings_path%></p>
+<%= image_tag "small_logo.png", alt: "Moto-Mad logo" %>
 
-    <% if current_user.id == @listing.user.id %>
-        <p><%= link_to  "Edit your listing", edit_listing_path(@listing.id) %></p>
+<p><%= link_to "All Listings", listings_path%></p>
 
-        <p><%= form_with model: @listing, local: true, method: "delete" do |form| %><p>
-        <%= submit_tag "Delete this listing" %>
-        <% end %>
+<% if current_user.id == @listing.user.id %>
+    <p><%= link_to  "Edit your listing", edit_listing_path(@listing.id) %></p>
+
+    <p><%= form_with model: @listing, local: true, method: "delete" do |form| %><p>
+    <%= submit_tag "Delete this listing" %>
     <% end %>
+<% end %>
 
-    <h1>    <%= @listing.title %> </h1>  
+<h1>    <%= @listing.title %> </h1>  
 
-    <% if @listing.picture.attached? %>
-            <%= image_tag @listing.picture, style: "width: 350px"%>
+<% if @listing.picture.attached? %>
+        <%= image_tag @listing.picture, style: "width: 350px"%>
+<% end %>
+
+<h2><%= @listing.year %>
+<%= @listing.manufacturer.manufacturer %>
+<%= @listing.model %></h2>
+
+<h4>Asking price: <%= number_to_currency(@listing.price) %> </h4>
+
+<p>Bike style: <%= @listing.style.style %> </p>
+<p>Mileage: <%= @listing.mileage %> km </p>
+<p>Engine size: <%= @listing.engine %>cc </p>
+<p>Seller's location: <%= @listing.location.location%> </p>
+<p>LAM's legal? <%= @listing.lams %> </p>
+<p>Seller's email: <%= @listing.user.email %> </p>
+<p>Description: <%= @listing.description %> </p>
+
+<% if current_user.id != @listing.user.id %>
+    <p><b>Ask the seller a question:</b></p>
+
+    <%= form_with model: @question, local: true, method: "post" do |form|  %>
+    <%= form.hidden_field(:listing_id, value: @listing.id) %>
+        <div>
+            <%= form.label :question_title %>
+            <%= form.text_field :title %>
+        </div>
+        <div>
+            <%= form.label :question_body %>
+            <%= form.text_area :body %>
+        </div>
+        <div>
+            <%= form.submit value: "Click to submit question" %>
+        </div>
     <% end %>
- 
-    <h2><%= @listing.year %>
-    <%= @listing.manufacturer.manufacturer %>
-    <%= @listing.model %></h2>
-
-    <h4>Asking price: <%= number_to_currency(@listing.price) %> </h4>
-
-    <p>Bike style: <%= @listing.style.style %> </p>
-    <p>Mileage: <%= @listing.mileage %> km </p>
-    <p>Engine size: <%= @listing.engine %>cc </p>
-    <p>Seller's location: <%= @listing.location.location%> </p>
-    <p>LAM's legal? <%= @listing.lams %> </p>
-    <p>Seller's email: <%= @listing.user.email %> </p>
-    <p>Description: <%= @listing.description %> </p>
-
-    <% if current_user.id != @listing.user.id %>
-        <p><b>Ask the seller a question:</b></p>
-
-        <%= form_with model: @question, local: true, method: "post" do |form|  %>
-        <%= form.hidden_field(:listing_id, value: @listing.id) %>
-            <div>
-                <%= form.label :question_title %>
-                <%= form.text_field :title %>
-            </div>
-            <div>
-                <%= form.label :question_body %>
-                <%= form.text_area :body %>
-            </div>
-            <div>
-                <%= form.submit value: "Click to submit question" %>
-            </div>
-        <% end %>
-    <% end %>
+<% end %>
     
 <h4><u><b>Previous Questions:</b></u></h4>
 
 <% for question in @questions %>
     <p><b><%= question.title %>:</b> 
     <%= question.body %></p>
+
+    <% if current_user.id == @listing.user.id %>
+        <%= form_with model: @answer, local: true, method: "post" do |form|  %>
+        <%= form.hidden_field(:question_id, value: @question.id) %>
+            <div>
+                <%= form.label :response %>
+                <%= form.text_area :body %>
+            </div>
+            <div>
+                <%= form.submit value: "Click to submit response" %>
+            </div>
+        <% end %>
+    <% end %>
+
 <% end %>
