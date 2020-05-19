@@ -26,11 +26,24 @@
     <h4>Asking price: <%= number_to_currency(@listing.price) %> </h4>
 
     <p>Bike style: <%= @listing.style.style %> </p>
-    <p>Mileage: <%= @listing.mileage %> </p>
+    <p>Mileage: <%= @listing.mileage %> km </p>
     <p>Engine size: <%= @listing.engine %>cc </p>
     <p>Seller's location: <%= @listing.location.location %> </p>
     <p>LAM's legal? <%= @listing.lams %> </p>
     <p>Seller's email: <%= @listing.user.email %> </p>
     <p>Description: <%= @listing.description %> </p>
 
+
+    <% if current_user.id != @listing.user.id %>
+        <%= form_with model: @listing, local: true do |form|  %>
+            <div>
+                <%= form.label :ask_the_seller_a_question %>
+                <%= form.text_area :description %>
+            </div>
+
+            <div>
+                <%= form.submit value: "Click to submit question" %>
+            </div>
+        <% end %>
+    <% end %>
     
