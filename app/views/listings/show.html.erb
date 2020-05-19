@@ -52,13 +52,10 @@
 <h4><u><b>Previous Questions:</b></u></h4>
 
 <% for question in @questions %>
-    <p><b><%= question.title %>:</b> 
-    <%= question.body %></p>
-
-    <i>Seller response: <%= @q_answer.body %>:</i> 
+    <p> <b><%= question.title %>:</b> <%= question.body %></p>
 
     <% for answer in question.answers %>
-    <li><%= answer.body %></li>
+    <p><i>Response:<%= answer.body %></i></p>
     <% end %>
 
     <% if current_user.id == @listing.user.id %>
