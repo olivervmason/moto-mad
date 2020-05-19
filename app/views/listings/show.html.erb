@@ -2,14 +2,15 @@
     </br>
     <%= link_to "All Listings", listings_path%>
     </br>
+
     <% if current_user.id == @listing.user.id %>
-    <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
+        <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
 
-    </br></br>
+        </br></br>
 
-    <%= form_with model: @listing, local: true, method: "delete" do |form| %>
-        <%= submit_tag "Delete this listing" %>
-        <% end %>
+        <%= form_with model: @listing, local: true, method: "delete" do |form| %>
+            <%= submit_tag "Delete this listing" %>
+    <% end %>
 
     <h1>    <%= @listing.title %> </h1> 
 
