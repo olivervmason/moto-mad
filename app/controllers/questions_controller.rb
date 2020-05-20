@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
     def create
         # render json: "Create question method"
         @question = current_user.questions.create(question_params)
-        redirect_to listings_path
+        redirect_to listing_path(@question.listing.id)
     end
         
     private
