@@ -31,7 +31,7 @@ class ListingsController < ApplicationController
         @questions = Question.all
         @answer = Answer.new
         @answers = Answer.all
-        @q_answer = Answer.find(params["id"])
+        # @q_answer = Answer.find(params["id"])
     end
 
     def edit
