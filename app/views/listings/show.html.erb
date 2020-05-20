@@ -54,6 +54,10 @@
 <% for question in @questions %>
     <p> <b><%= question.title %>:</b> <%= question.body %></p>
 
+    <% if current_user.id == @listing.user.id %>
+       <p style="color:blue">This question is from <%= question.user.email %></p>
+    <% end %>
+
     <% for answer in question.answers %>
     <p><i>Response:<%= answer.body %></i></p>
     <% end %>
@@ -69,6 +73,7 @@
                 <%= form.submit value: "Click to submit response" %>
             </div>
         <% end %>
+        <p>-------------------------------------------------</p>
     <% end %>
 
 <% end %>

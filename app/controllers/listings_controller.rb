@@ -21,7 +21,8 @@ class ListingsController < ApplicationController
             render "new"
             puts @listing.errors.full_messages  
         else
-            redirect_to listings_path            
+            redirect_to listing_path(@listing.id)
+            # redirect_to listings_path            
         end
     end
 
@@ -31,7 +32,7 @@ class ListingsController < ApplicationController
         @questions = Question.all
         @answer = Answer.new
         @answers = Answer.all
-        # @q_answer = Answer.find(params["id"])
+        @user = @listing.user.email
     end
 
     def edit
