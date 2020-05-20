@@ -32,7 +32,6 @@ class ListingsController < ApplicationController
         @questions = Question.all
         @answer = Answer.new
         @answers = Answer.all
-        @user = @listing.user.email
     end
 
     def edit
