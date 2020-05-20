@@ -4,4 +4,7 @@ class PagesController < ApplicationController
         # render json: "Pages Index method"
     end
 
+    def payment
+    end
+
 end

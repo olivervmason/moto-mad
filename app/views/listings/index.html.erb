@@ -2,6 +2,8 @@
 </br>
 <h1>Listings page</h1>
 
+<button data-stripe="donate">Buy us a beer! $10</button>
+
 <p><%= link_to "Create a listing for your bike here!", new_listing_path %></p>
 
 <% for listing in @listings %>
@@ -13,3 +15,18 @@
     <br/><br/>    
 <% end %>
 
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='donate']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>

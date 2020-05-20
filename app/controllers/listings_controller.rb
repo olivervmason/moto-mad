@@ -11,7 +11,8 @@ class ListingsController < ApplicationController
             line_items: [{
                 name: "Donation to MadMoto",
                 currency: 'nzd',
-                quantity: 1000
+                quantity: 1,
+                amount: 2500
             }],
             payment_intent_data: {
                 metadata: {
