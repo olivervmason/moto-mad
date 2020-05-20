@@ -4,6 +4,24 @@ class ListingsController < ApplicationController
 
     def index
         @listings = Listing.all
+
+        session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user.email,
+            line_items: [{
+                name: "Donation to MadMoto",
+                currency: 'nzd',
+                quantity: 1000
+            }],
+            payment_intent_data: {
+                metadata: {
+                    user_id: current_user.id,
+                }
+            },
+            success_url: "#{root_url}payments/success?userId=#{current_user.id}",
+            cancel_url: "#{root_url}listings"
+        )    
+        @session_id = session.id
     end
 
     def new
