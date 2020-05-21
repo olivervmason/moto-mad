@@ -12,7 +12,7 @@ class ListingsController < ApplicationController
                 name: "Donation to MadMoto",
                 currency: 'nzd',
                 quantity: 1,
-                amount: 2500
+                amount: 1000
             }],
             payment_intent_data: {
                 metadata: {

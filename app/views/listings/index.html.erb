@@ -1,10 +1,10 @@
-<%= image_tag "small_logo.png", alt: "Moto-Mad logo" %>
-</br>
+<button data-stripe="donate">Like the site? Buy us a beer! $10</button>
+</br></br>
+<%= image_tag "small_logo.png", style: "height: 100px", alt: "Moto-Mad logo" %>
+
 <h1>Listings page</h1>
 
-<button data-stripe="donate">Buy us a beer! $10</button>
-
-<p><%= link_to "Create a listing for your bike here!", new_listing_path %></p>
+<p style="color:blue"><%= link_to "Create a listing for your bike here!", new_listing_path %></p>
 
 <% for listing in @listings %>
     <b><%= link_to "#{listing.title}", listing_path(listing.id) %></b>
