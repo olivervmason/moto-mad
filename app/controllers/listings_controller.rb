@@ -1,28 +1,11 @@
 class ListingsController < ApplicationController
 
     before_action :authenticate_user!
+    before_action :define_listing, only: [:edit, :update, :destroy] 
 
     def index
         @listings = Listing.all
-
-        session = Stripe::Checkout::Session.create(
-            payment_method_types: ['card'],
-            customer_email: current_user.email,
-            line_items: [{
-                name: "Donation to MadMoto",
-                currency: 'nzd',
-                quantity: 1,
-                amount: 1000
-            }],
-            payment_intent_data: {
-                metadata: {
-                    user_id: current_user.id,
-                }
-            },
-            success_url: "#{root_url}payments/success?userId=#{current_user.id}",
-            cancel_url: "#{root_url}listings"
-        )    
-        @session_id = session.id
+        set_stripe_session
     end
 
     def new
@@ -40,8 +23,7 @@ class ListingsController < ApplicationController
             render "new"
             puts @listing.errors.full_messages  
         else
-            redirect_to listing_path(@listing.id)
-            # redirect_to listings_path            
+            redirect_to listing_path(@listing.id)            
         end
     end
 
@@ -56,7 +38,6 @@ class ListingsController < ApplicationController
     def edit
         set_new_listing_variables
         set_manufacturer_style_and_locations
-        @listing = current_user.listings.find_by_id(params["id"])
 
         if @listing
             render("edit") 
@@ -67,7 +48,6 @@ class ListingsController < ApplicationController
 
     def update
         @lams = Listing.lams.keys
-        @listing = current_user.listings.find_by_id(params["id"])
         if @listing
             @listing.update(listing_parameters)
             if @listing.errors.any? 
@@ -81,7 +61,6 @@ class ListingsController < ApplicationController
     end
 
     def destroy
-        @listing = current_user.listings.find_by_id(params["id"])
         if @listing 
             @listing.destroy
         end
@@ -102,6 +81,31 @@ class ListingsController < ApplicationController
         @manufacturer = Manufacturer.all
         @style = Style.all
         @location = Location.all
+    end
+
+    def define_listing
+        @listing = current_user.listings.find_by_id(params["id"])
+    end
+
+    def set_stripe_session
+        session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user.email,
+            line_items: [{
+                name: "Donation to MadMoto",
+                currency: 'nzd',
+                quantity: 1,
+                amount: 1000
+            }],
+            payment_intent_data: {
+                metadata: {
+                    user_id: current_user.id,
+                }
+            },
+            success_url: "#{root_url}payments/success?userId=#{current_user.id}",
+            cancel_url: "#{root_url}listings"
+        )    
+        @session_id = session.id
     end
 
 end
