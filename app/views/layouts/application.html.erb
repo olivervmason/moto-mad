@@ -9,15 +9,47 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-      <% if user_signed_in? %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Login/Signup", new_user_session_path %>
-      <% end %>
+  <body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <% if user_signed_in? %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to "Login/Signup", new_user_session_path %>
+            <% end %>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">            
+                    <li class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"><%= link_to "All Listings", listings_path%></li>
+                    <li class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"><%= link_to "Create a listing", new_listing_path %></li>
+                </ul>
+                <%= image_tag "small_logo.png", style: "width: 170px", alt: "Moto-Mad logo" %>
+            </div>
+        </div>
+    </nav>
 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
+
+    <!-- Footer-->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+              <!-- Footer Location-->
+              <div class="col-lg-4 mb-5 mb-lg-0">
+                  <h4 class="text-uppercase mb-4">Location</h4>
+                  <p class="lead mb-0">2215 John Daniel Drive<br />Clark, MO 65243</p>
+              </div>
+              <!-- Footer About Text-->
+              <div class="col-lg-4">
+                  <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                  <p class="lead mb-0">Freelance is a free to use, MIT licensed Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+              </div>
+            </div>
+        </div>
+    </footer>
+
   </body>
 </html>

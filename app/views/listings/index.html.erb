@@ -1,19 +1,33 @@
-<button data-stripe="donate">Like the site? Buy us a beer! $10</button>
 </br></br>
-<%= image_tag "small_logo.png", style: "height: 100px", alt: "Moto-Mad logo" %>
+<!-- Portfolio Grid-->
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+        <button data-stripe="donate">Like the site? Buy us a beer! $10</button>
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Listings homepage</h2>
+            <h3 class="section-subheading text-muted">Find your perfect bike here!</h3>
+        </div>
 
-<h1>Listings page</h1>
+        <div class="row">
+          <% for listing in @listings %>
+            <div class="col-lg-4 col-sm-6 mb-4">
+              <% if listing.picture.attached? %>
+                    <%= image_tag listing.picture, style: "height: 200px"%>
+              <% end %>
+              </br>
+              <b><%= link_to "#{listing.title}", listing_path(listing.id) %></b>
+              </br>
+              <%= listing.year %> 
+              <%= listing.manufacturer.manufacturer %>
+              <%= listing.model %> -
+              <%= number_to_currency(listing.price) %>
+              <br/><br/>    
+            </div>
+          <% end %>
 
-<p style="color:blue"><%= link_to "Create a listing for your bike here!", new_listing_path %></p>
-
-<% for listing in @listings %>
-    <b><%= link_to "#{listing.title}", listing_path(listing.id) %></b>
-    <%= listing.year %> 
-    <%= listing.manufacturer.manufacturer %>
-    <%= listing.model %> -
-    <%= number_to_currency(listing.price) %>
-    <br/><br/>    
-<% end %>
+        </div>
+    </div>
+</section>
 
 <script src="https://js.stripe.com/v3/"></script>
 
