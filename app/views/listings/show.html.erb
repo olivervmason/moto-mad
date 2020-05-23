@@ -89,7 +89,7 @@
 
         <%= form_with model: @question, local: true, method: "post" do |form|  %>
             <%= form.hidden_field(:listing_id, value: @listing.id) %>
-            <div>
+                <div>
                     <%= form.label :question_title %>
                     <%= form.text_field :title %>
                 </div>
