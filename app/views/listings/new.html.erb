@@ -1,9 +1,1 @@
-<p><%= link_to "All Listings", listings_path%></p>
-
-<%= image_tag "small_logo.png", style: "height: 100px", alt: "Moto-Mad logo" %>
-
-<h1>New listing form</h1> 
-
-<p>Please add the details of your bike in the form below. <br> All fields apart from a picture are mandatory. </p>
-
 <%= render "form", listing: @listing, lams: @lams, manufacturer: @manufacturer, style: @style, location: @location %>

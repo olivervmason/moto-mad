@@ -1,81 +1,92 @@
 <%= form_with model: @listing, local: true do |form|  %>
 
-    <div>
-        <%= form.label :bike_location %>
-        <%= form.select(:location_id, location.map{|l| [l.location, l.id]}) %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :bike_manufacturer %>
-        <%= form.select(:manufacturer_id, manufacturer.map{|m| [m.manufacturer, m.id]}) %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :bike_style %>
-        <%= form.select(:style_id, style.map{|s| [s.style, s.id]}) %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :listing_title %>
-        <%= form.text_field :title %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :model %>
-        <%= form.text_field :model %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :year %>
-        <%= form.number_field :year %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :mileage_in_km %>
-        <%= form.number_field :mileage %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :engine_cc %>
-        <%= form.number_field :engine %>
-    </div>
-    </br>
-    <div>
-        <%= form.label :price %>
-        <%= form.number_field :price %>
-    </div>
-    </br>
-    LAMs approved?
-    <% lams.each do |option| %>
-        <div>
-            <%= form.radio_button :lams, option %>
-            <%= form.label "lams_#{option}".to_sym, option, value: listing.lams %>
-        <div>
-    <% end %>
+    <!-- Contact Section-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <!-- Contact Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Listing Details</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <p class="text-center">Please add the details of your bike in the form below. <br> All fields apart from a picture are mandatory. </p>
+            <!-- Contact Section Form-->
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
 
-    <div>
-        <%= form.label :description %>
-        <%= form.text_area :description %>
-    </div>
+                        <div>
+                            <%= form.label :bike_location %>
+                            <%= form.select(:location_id, location.map{|l| [l.location, l.id]}) %>
+                        </div>
+                        <div>
+                            <%= form.label :bike_manufacturer %>
+                            <%= form.select(:manufacturer_id, manufacturer.map{|m| [m.manufacturer, m.id]}) %>
+                        </div>
+                        <div>
+                            <%= form.label :bike_style %>
+                            <%= form.select(:style_id, style.map{|s| [s.style, s.id]}) %>
+                        </div>
+                        <div>
+                            <%= form.label :listing_title %>
+                            <%= form.text_field :title %>
+                        </div>
+                        <div>
+                            <%= form.label :model %>
+                            <%= form.text_field :model %>
+                        </div>
+                        <div>
+                            <%= form.label :year %>
+                            <%= form.number_field :year %>
+                        </div>
+                        <div>
+                            <%= form.label :mileage_in_km %>
+                            <%= form.number_field :mileage %>
+                        </div>
+                        <div>
+                            <%= form.label :engine_cc %>
+                            <%= form.number_field :engine %>
+                        </div>
+                        <div>
+                            <%= form.label :price %>
+                            <%= form.number_field :price %>
+                        </div>
+                        </br>LAMs approved?
+                        <% lams.each do |option| %>
+                            <div>
+                                <%= form.radio_button :lams, option %>
+                                <%= form.label "lams_#{option}".to_sym, option, value: listing.lams %>
+                            <div>
+                        <% end %>
+                        <div>
+                            <%= form.label :description %>
+                            <%= form.text_area :description %>
+                        </div>
+                        <div>
+                            <%= form.label :listing_picture %>
+                            <%= form.file_field :picture, accept: "image/png,image/jpeg,image/jpg,image/gif" %>
+                        </div>   
 
-    <div>
-        <%= form.label :listing_picture %>
-        <%= form.file_field :picture, accept: "image/png,image/jpeg,image/jpg,image/gif" %>
-    </div>   
+                        </br>
 
-    </br>
+                        <div>
+                            <%= form.submit value: "Click to save listing" %>
+                        </div>
 
-    <div>
-        <%= form.submit value: "Click to save listing" %>
-    </div>
-
-    <% if listing.errors.any? %>
-    <p style="color:red">It looks like there was some information missing from the form you submitted:</p>
-    <ul>
-        <% listing.errors.full_messages.each do |error| %>
-        <li style="color:red" > <%= error %> </li>
-        <%end %>
-    <%end %>
-    </ul>
-    </br>
+                        <% if listing.errors.any? %>
+                        <p style="color:red">It looks like there was some information missing from the form you submitted:</p>
+                        <ul>
+                            <% listing.errors.full_messages.each do |error| %>
+                            <li style="color:red" > <%= error %> </li>
+                            <%end %>
+                        <%end %>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 <% end %>

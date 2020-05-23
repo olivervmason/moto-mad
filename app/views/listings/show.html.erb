@@ -1,82 +1,107 @@
-<%= image_tag "small_logo.png", style: "height: 100px", alt: "Moto-Mad logo" %>
+<!-- About Section-->
+<section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+    <!-- About Section Heading-->
+    <h2 class="page-section-heading text-center text-uppercase text-white"><%= @listing.title %></h2>
+    <!-- Icon Divider-->
 
-<p><%= link_to "All Listings", listings_path%></p>
-
-<% if current_user.id == @listing.user.id %>
-    <p><%= link_to  "Edit your listing", edit_listing_path(@listing.id) %></p>
-
-    <p><%= form_with model: @listing, local: true, method: "delete" do |form| %><p>
-    <%= submit_tag "Delete this listing" %>
-    <% end %>
-<% end %>
-
-<h1>    <%= @listing.title %> </h1>  
-
-<% if @listing.picture.attached? %>
-        <%= image_tag @listing.picture, style: "width: 350px"%>
-<% end %>
-
-<h2><%= @listing.year %>
-<%= @listing.manufacturer.manufacturer %>
-<%= @listing.model %></h2>
-
-<h4>Asking price: <%= number_to_currency(@listing.price) %> </h4>
-
-<p>Bike style: <%= @listing.style.style %> </p>
-<p>Mileage: <%= @listing.mileage %> km </p>
-<p>Engine size: <%= @listing.engine %>cc </p>
-<p>Seller's location: <%= @listing.location.location%> </p>
-<p>LAM's legal? <%= @listing.lams %> </p>
-<p>Seller's email: <%= @listing.user.email %> </p>
-<p>Description: <%= @listing.description %> </p>
-
-<% if current_user.id != @listing.user.id %>
-    <p><b>Ask the seller a question:</b></p>
-
-    <%= form_with model: @question, local: true, method: "post" do |form|  %>
-    <%= form.hidden_field(:listing_id, value: @listing.id) %>
-        <div>
-            <%= form.label :question_title %>
-            <%= form.text_field :title %>
-        </div>
-        <div>
-            <%= form.label :question_body %>
-            <%= form.text_area :body %>
-        </div>
-        <div>
-            <%= form.submit value: "Click to submit question" %>
+    <% if current_user.id == @listing.user.id %>
+        <div class="divider-custom divider-light">
+            <p><%= form_with model: @listing, local: true, method: "delete" do |form| %><p>
+                <%= submit_tag "Delete this listing" %>
+            <% end %>
         </div>
     <% end %>
-<% end %>
-    
-<h4><u><b>Previous Questions:</b></u></h4>
 
-<% for question in @questions %>
-
-    <% if question.listing.id == @listing.id %>  
-        <p> <b><%= question.title %>:</b> <%= question.body %></p>
-
-        <% if current_user.id == @listing.user.id %>
-        <p style="color:blue">This question is from <%= question.user.email %></p>
+    <div class="divider-custom divider-light">
+        <% if @listing.picture.attached? %></br>
+            <%= image_tag @listing.picture, style: "width: 550px"%>
         <% end %>
+    </div>
 
-        <% for answer in question.answers %>
-        <p><i>Response:<%= answer.body %></i></p>
+    <div class="divider-custom divider-light">
+        <h4><%= @listing.year %>
+        <%= @listing.manufacturer.manufacturer %>
+        <%= @listing.model %></h4>
+    </div>
+
+    <div class="divider-custom divider-light">
+        <h5>Asking price: <%= number_to_currency(@listing.price) %> </h5>
+    </div>
+    <!-- About Section Content-->
+
+    <div class="row">
+        <div class="col-lg-4 mr-auto"><p class="lead">Bike style: <%= @listing.style.style %> </p></div>
+        <div class="col-lg-4 mr-auto"><p class="lead">Mileage: <%= @listing.mileage %> km </p></div>
+        <div class="col-lg-4 mr-auto"><p class="lead">Engine size: <%= @listing.engine %>cc </p></div>
+        <div class="col-lg-4 mr-auto"><p class="lead"> Seller's location: <%= @listing.location.location%> </p></div>
+        <div class="col-lg-4 mr-auto"><p class="lead"> LAM's legal? <%= @listing.lams %> </p></div>
+        <div class="col-lg-4 mr-auto"><p class="lead"> Seller's email: <%= @listing.user.email %> </p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 mr-auto"><p class="lead">Description: <%= @listing.description %></p></div>
+    </div>
+
+    <% if current_user.id == @listing.user.id %>
+        <div class="row">
+            <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
+        </div>
+    <% end %>
+
+    <h4><u><b>Questions for the seller:</b></u></h4>
+
+    <div class="row">
+        <% for question in @questions %>
+            <% if question.listing.id == @listing.id %>  
+                <div class="col-lg-12 mr-auto"><p class="lead"> <b><%= question.title %>:</b> <%= question.body %></p></div>
+
+                <% if current_user.id == @listing.user.id %>
+                    <p class="col-lg-12 mr-auto", style="color:blue">This question is from <%= question.user.email %></p>
+                <% end %>
+
+                <% for answer in question.answers %>
+                    <p class="col-lg-12 mr-auto"><i>Response:<%= answer.body %></i></p>
+                <% end %>
+
+                <% if current_user.id == @listing.user.id %>
+                    <%= form_with model: @answer, local: true, method: "post" do |form|  %>
+                        <%= form.hidden_field(:question_id, value: question.id) %>
+                        
+                        <div class="col-lg-4 mr-auto">
+                            <%= form.label :response %>
+                            <%= form.text_area :body %>
+                        </div>
+
+                        <div class="col-lg-4 mr-auto">
+                            <%= form.submit value: "Click to submit response" %>
+                            </br>
+                        </div>
+                    <% end %>
+                <% end %>
+            <% end %>
         <% end %>
+    </div>
+    </br>
 
-        <% if current_user.id == @listing.user.id %>
-            <%= form_with model: @answer, local: true, method: "post" do |form|  %>
-            <%= form.hidden_field(:question_id, value: question.id) %>
-                <div>
-                    <%= form.label :response %>
+    <% if current_user.id != @listing.user.id %>
+        <p><b>Ask the seller a question:</b></p>
+
+        <%= form_with model: @question, local: true, method: "post" do |form|  %>
+            <%= form.hidden_field(:listing_id, value: @listing.id) %>
+            <div>
+                    <%= form.label :question_title %>
+                    <%= form.text_field :title %>
+                </div>
+                <div class="col-lg- mr-auto">
+                    <%= form.label :question_body %>
                     <%= form.text_area :body %>
                 </div>
                 <div>
-                    <%= form.submit value: "Click to submit response" %>
+                     <%= form.submit value: "Click to submit question" %>
                 </div>
-            <% end %>
-            <p>-------------------------------------------------</p>
+            </div>       
         <% end %>
     <% end %>
 
-<% end %>
+</section>
