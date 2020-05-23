@@ -44,8 +44,11 @@
     </div>
 
     <% if current_user.id == @listing.user.id %>
+        <p>Edit listing link below this line </p>
         <div class="row">
-            <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
+            <div class="col-lg-4 mr-auto">
+                <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
+            </div>
         </div>
     <% end %>
 

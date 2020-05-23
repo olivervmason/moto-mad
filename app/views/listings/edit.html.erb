@@ -1,15 +1,5 @@
-<%= image_tag "small_logo.png", style: "height: 100px", alt: "Moto-Mad logo" %>
-</br>
-<%= link_to "All Listings", listings_path%>
-
-<h1>Edit listing form</h1> 
-
-<p>Edit the details of your bike in the form below:</p>
-
 <%= render "form", listing: @listing, lams: @lams, manufacturer: @manufacturer, style: @style, location: @location %>
 
 <%= form_with model: @listing, local: true, method: "delete" do |form| %>
-
-<%= submit_tag "DELETE LISTING" %>
 
 <% end %>
