@@ -19,7 +19,8 @@
               <%= link_to "Login/Signup", new_user_session_path %>
             <% end %>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">            
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"><%= link_to "Project Information", info_path %></li>            
                     <li class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"><%= link_to "All Listings", listings_path%></li>
                     <li class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"><%= link_to "Create a listing", new_listing_path %></li>
                 </ul>

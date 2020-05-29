@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 #Pages controller:
   get "/", to: "pages#index", as: "root"
   get "/payments/success", to: "pages#payment"
+  get "/info/", to: "pages#info", as: "info"
 
 # Listings controller:  
   get "/listings/", to: "listings#index", as: "listings"
