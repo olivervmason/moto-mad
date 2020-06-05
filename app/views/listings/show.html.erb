@@ -44,9 +44,8 @@
     </div>
 
     <% if current_user.id == @listing.user.id %>       
-        <p style="color:black">Below this line</p>
-            <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %>
-        <p style="color:black">Above this line</p>
+        <b> <u> <%= link_to  "Edit your listing", edit_listing_path(@listing.id) %> </ul> </b>
+        <p></p>
     <% end %>
     
     <h4><u><b>Questions for the seller:</b></u></h4>
