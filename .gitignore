@@ -27,4 +27,5 @@
 /config/master.key
 
 # Ignore bootstrapped CSS files:
-/app/assets/stylesheets/*
+app/assets/stylesheets/application.css
+app/assets/stylesheets/styles.css
