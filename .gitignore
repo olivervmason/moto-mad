@@ -25,3 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Reclassify bootstrapped CSS file to Ruby to reflect nature of project on GH
+*.css linguist-language=Ruby
